@@ -1,9 +1,12 @@
 import "./App.css";
 import LandingPage from "./component/LandingPage";
+import { EpisodesContextProvider } from "./component/GetAllEpisodes";
 function App() {
   return (
     <div className="App">
-      <LandingPage />
+      <EpisodesContextProvider>
+        <LandingPage />
+      </EpisodesContextProvider>
     </div>
   );
 }

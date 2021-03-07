@@ -1,9 +1,10 @@
-.episodes-container{
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    justify-content: center;
+.episodes-container {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
 }
-.card{
-      margin: 20px;
+.card {
+  margin: 20px;
+  height: 500px;
 }
