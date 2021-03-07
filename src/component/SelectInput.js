@@ -4,7 +4,7 @@ function SelectInput({ episodes, handleSelect }) {
   return (
     <div>
       <select onChange={handleSelect}>
-        <option>Select an episode</option>
+        <option>Select all episodes</option>
         {episodes.map((episode, i) => {
           return <option key={i}>{episode.name}</option>;
         })}

@@ -5,12 +5,12 @@ import SearchBar from "./SearchBar";
 import SelectInput from "./SelectInput";
 export default function LandingPage() {
   const [searchInput, setSearchInput] = useState([]);
-  const [selectValue, setSelectValue] = useState("");
+  const [selectValue, setSelectValue] = useState("Select all episodes");
   const searchValue = (e) => {
     setSearchInput(e.target.value.toLowerCase());
   };
   let filterEpisode = allEpisodes.allEpisodes.filter((item) =>
-    selectValue === "" || searchInput.length > 0
+    selectValue === "Select all episodes" || searchInput.length > 0
       ? item.name.toLowerCase().indexOf(searchInput) !== -1 ||
         item.summary.toLowerCase().includes(searchInput)
       : item.name === selectValue
@@ -28,9 +28,6 @@ export default function LandingPage() {
     setSelectValue(e.target.value);
     setSearchInput([]);
   };
-
-  // const selectFilter = allEpisodes.allEpisodes.filter(
-  //   (item) =>  item.name === selectValue)
 
   const replaceTags = (text) => {
     return text.replace(/(<([^>]+)>)/gi, "");
