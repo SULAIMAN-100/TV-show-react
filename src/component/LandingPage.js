@@ -2,17 +2,19 @@ import React, { useState } from "react";
 import allEpisodes from "./episodes";
 import "./LandingPage.css";
 import SearchBar from "./SearchBar";
+import SelectInput from "./SelectInput";
 export default function LandingPage() {
   const [searchInput, setSearchInput] = useState([]);
+  const [selectValue, setSelectValue] = useState("");
   const searchValue = (e) => {
     setSearchInput(e.target.value.toLowerCase());
   };
-  let filterEpisode = allEpisodes.allEpisodes.filter(
-    (item) =>
-      item.name.toLowerCase().indexOf(searchInput) !== -1 ||
-      item.summary.toLowerCase().includes(searchInput)
+  let filterEpisode = allEpisodes.allEpisodes.filter((item) =>
+    selectValue === "" || searchInput.length > 0
+      ? item.name.toLowerCase().indexOf(searchInput) !== -1 ||
+        item.summary.toLowerCase().includes(searchInput)
+      : item.name === selectValue
   );
-
   const seasonNumbers = (episode) => {
     if (episode.season < 10 && episode.number < 10) {
       return ` - S0${episode.season}E0${episode.number}`;
@@ -21,12 +23,29 @@ export default function LandingPage() {
     }
   };
 
+  /////// Select input handling
+  const handleSelect = (e) => {
+    setSelectValue(e.target.value);
+    setSearchInput([]);
+  };
+
+  // const selectFilter = allEpisodes.allEpisodes.filter(
+  //   (item) =>  item.name === selectValue)
+
   const replaceTags = (text) => {
     return text.replace(/(<([^>]+)>)/gi, "");
   };
   return (
     <>
-      <SearchBar searchValue={searchValue} filterEpisode={filterEpisode} allEpisodes={allEpisodes.allEpisodes}/>
+      <SearchBar
+        searchValue={searchValue}
+        filterEpisode={filterEpisode}
+        allEpisodes={allEpisodes.allEpisodes}
+      />
+      <SelectInput
+        episodes={allEpisodes.allEpisodes}
+        handleSelect={handleSelect}
+      />
       <div className="episodes-container">
         {allEpisodes &&
           filterEpisode.map((episode, index) => {
