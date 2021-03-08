@@ -6,5 +6,21 @@
 }
 .card {
   margin: 20px;
-  height: 500px;
+  height: auto;
+}
+
+.content-css {
+  text-align: center;
+  line-height: 1.5;
+  transition: 0.3s;
+}
+.my-anchor-css-class {
+  text-decoration: none;
+  margin: 5px;
+  text-transform: uppercase;
+  font-weight: 600;
+  font-family: monospace;
+  color: rgb(212, 44, 44);
+  padding: 3px;
+  border-radius: 3px;
 }

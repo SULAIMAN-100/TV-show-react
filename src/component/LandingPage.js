@@ -3,14 +3,14 @@ import "./LandingPage.css";
 import SearchBar from "./SearchBar";
 import SelectInput from "./SelectInput";
 import { GetAllEpisodes } from "./GetAllEpisodes";
+import ShowMoreText from "react-show-more-text";
 export default function LandingPage() {
   const { allEpisodesApi } = useContext(GetAllEpisodes);
 
   const [searchInput, setSearchInput] = useState([]);
   const [selectValue, setSelectValue] = useState("Select all episodes");
   const [showLessBtn, setShowLessBtn] = useState("SHOW MORE");
-  const [btnValue, setBtnValue] = useState(null);
-  console.log(allEpisodesApi);
+
   const searchValue = (e) => {
     setSearchInput(e.target.value.toLowerCase());
   };
@@ -35,14 +35,7 @@ export default function LandingPage() {
   };
 
   //// Show less and more text
-  const handleLessBts = (text) => {
-    console.log(text);
-    if (showLessBtn === "SHOW MORE") {
-      return text.substring(0, 150) + "...";
-    } else if (showLessBtn === "SHOW LESS") {
-      return text;
-    }
-  };
+
   const replaceTags = (text) => {
     return text.replace(/(<([^>]+)>)/gi, "");
   };
@@ -56,8 +49,8 @@ export default function LandingPage() {
       <SelectInput episodes={allEpisodesApi} handleSelect={handleSelect} />
       <div className="episodes-container">
         {allEpisodesApi &&
-          filterEpisode.map((episode, index) => {
-            let text = replaceTags(episode.summary);
+          filterEpisode.map((episode, index, e) => {
+            console.log();
 
             return (
               <div className="card" style={{ width: "18rem" }} key={index}>
@@ -71,19 +64,18 @@ export default function LandingPage() {
                   alt=""
                 />
                 <div className="card-body">
-                  <p className="card-text" id="text">
-                    {replaceTags(episode.summary)}
-                  </p>
-                  <button
-                    onClick={() =>
-                      handleLessBts(episode.summary) &&
-                      showLessBtn === "SHOW MORE"
-                        ? setShowLessBtn("SHOW LESS")
-                        : setShowLessBtn("SHOW MORE")
-                    }
+                  <ShowMoreText
+                    /* Default options */
+                    lines={5}
+                    more="Show more"
+                    less="Show less"
+                    className="content-css"
+                    anchorClass="my-anchor-css-class"
+                    onClick={(e) => e.executeOnClick}
+                    expanded={false}
                   >
-                    {showLessBtn}
-                  </button>
+                    {replaceTags(episode.summary)}
+                  </ShowMoreText>
                 </div>
               </div>
             );
