@@ -1,13 +1,15 @@
 import "./App.css";
-import LandingPage from "./component/LandingPage";
-import { EpisodesContextProvider } from "./component/GetAllEpisodes";
+import EpisodesPage from "./component/EpisodesPage";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import DisplayAllShows from "./component/DisplayAllShows";
 function App() {
   return (
-    <div className="App">
-      <EpisodesContextProvider>
-        <LandingPage />
-      </EpisodesContextProvider>
-    </div>
+    <Router>
+      <Switch>
+        <Route exact path="/" component={DisplayAllShows} />
+        <Route path="/episodes/:id" component={EpisodesPage} />
+      </Switch>
+    </Router>
   );
 }
 

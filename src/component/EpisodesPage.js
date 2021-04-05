@@ -1,15 +1,23 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useEffect } from "react";
 import "./LandingPage.css";
 import SearchBar from "./SearchBar";
 import SelectInput from "./SelectInput";
-import { GetAllEpisodes } from "./GetAllEpisodes";
+import {useParams} from "react-router-dom"
+
 import ShowMoreText from "react-show-more-text";
-export default function LandingPage() {
-  const { allEpisodesApi } = useContext(GetAllEpisodes);
+export default function EpisodesPage() {
+const {id} = useParams();
+console.log(id);
 
   const [searchInput, setSearchInput] = useState([]);
   const [selectValue, setSelectValue] = useState("Select all episodes");
-  const [showLessBtn, setShowLessBtn] = useState("SHOW MORE");
+
+    const [allEpisodesApi, setAllEpisodesApi] = useState([]);
+    useEffect(() => {
+      fetch(`https://api.tvmaze.com/shows/${id}/episodes`)
+        .then((data) => data.json())
+        .then((data) => setAllEpisodesApi(data));
+    }, [id]);
 
   const searchValue = (e) => {
     setSearchInput(e.target.value.toLowerCase());

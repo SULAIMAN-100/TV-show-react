@@ -7,8 +7,11 @@
 .card {
   margin: 20px;
   height: auto;
-}
 
+}
+.card-title{
+  text-align: center;
+}
 .content-css {
   text-align: center;
   line-height: 1.5;

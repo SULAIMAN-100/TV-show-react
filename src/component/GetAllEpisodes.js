@@ -1,6 +1,7 @@
-import React, { useState, createContext, useEffect } from "react";
-export const GetAllEpisodes = createContext();
+import React, { useState, useEffect } from "react";
+
 export const EpisodesContextProvider = (props) => {
+
   const [allEpisodesApi, setAllEpisodesApi] = useState([]);
   useEffect(() => {
     fetch("https://api.tvmaze.com/shows/82/episodes")
@@ -8,9 +9,5 @@ export const EpisodesContextProvider = (props) => {
       .then((data) => setAllEpisodesApi(data));
   }, []);
 
-  return (
-    <GetAllEpisodes.Provider value={{ allEpisodesApi }}>
-      {props.children}
-    </GetAllEpisodes.Provider>
-  );
+
 };
