@@ -1,15 +1,20 @@
-import React, { useState } from "react";
-import allEpisodes from "./episodes";
+import React, { useState, useContext } from "react";
 import "./LandingPage.css";
 import SearchBar from "./SearchBar";
 import SelectInput from "./SelectInput";
+import { GetAllEpisodes } from "./GetAllEpisodes";
+import ShowMoreText from "react-show-more-text";
 export default function LandingPage() {
+  const { allEpisodesApi } = useContext(GetAllEpisodes);
+
   const [searchInput, setSearchInput] = useState([]);
   const [selectValue, setSelectValue] = useState("Select all episodes");
+  const [showLessBtn, setShowLessBtn] = useState("SHOW MORE");
+
   const searchValue = (e) => {
     setSearchInput(e.target.value.toLowerCase());
   };
-  let filterEpisode = allEpisodes.allEpisodes.filter((item) =>
+  let filterEpisode = allEpisodesApi.filter((item) =>
     selectValue === "Select all episodes" || searchInput.length > 0
       ? item.name.toLowerCase().indexOf(searchInput) !== -1 ||
         item.summary.toLowerCase().includes(searchInput)
@@ -29,6 +34,8 @@ export default function LandingPage() {
     setSearchInput([]);
   };
 
+  //// Show less and more text
+
   const replaceTags = (text) => {
     return text.replace(/(<([^>]+)>)/gi, "");
   };
@@ -37,15 +44,14 @@ export default function LandingPage() {
       <SearchBar
         searchValue={searchValue}
         filterEpisode={filterEpisode}
-        allEpisodes={allEpisodes.allEpisodes}
+        allEpisodes={allEpisodesApi}
       />
-      <SelectInput
-        episodes={allEpisodes.allEpisodes}
-        handleSelect={handleSelect}
-      />
+      <SelectInput episodes={allEpisodesApi} handleSelect={handleSelect} />
       <div className="episodes-container">
-        {allEpisodes &&
-          filterEpisode.map((episode, index) => {
+        {allEpisodesApi &&
+          filterEpisode.map((episode, index, e) => {
+            console.log();
+
             return (
               <div className="card" style={{ width: "18rem" }} key={index}>
                 <h5 className="card-title">
@@ -58,9 +64,18 @@ export default function LandingPage() {
                   alt=""
                 />
                 <div className="card-body">
-                  <p className="card-text" id="text">
+                  <ShowMoreText
+                    /* Default options */
+                    lines={5}
+                    more="Show more"
+                    less="Show less"
+                    className="content-css"
+                    anchorClass="my-anchor-css-class"
+                    onClick={(e) => e.executeOnClick}
+                    expanded={false}
+                  >
                     {replaceTags(episode.summary)}
-                  </p>
+                  </ShowMoreText>
                 </div>
               </div>
             );

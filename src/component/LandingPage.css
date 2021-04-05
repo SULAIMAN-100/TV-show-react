@@ -1,9 +1,26 @@
-.episodes-container{
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    justify-content: center;
+.episodes-container {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
 }
-.card{
-      margin: 20px;
+.card {
+  margin: 20px;
+  height: auto;
+}
+
+.content-css {
+  text-align: center;
+  line-height: 1.5;
+  transition: 0.3s;
+}
+.my-anchor-css-class {
+  text-decoration: none;
+  margin: 5px;
+  text-transform: uppercase;
+  font-weight: 600;
+  font-family: monospace;
+  color: rgb(212, 44, 44);
+  padding: 3px;
+  border-radius: 3px;
 }
