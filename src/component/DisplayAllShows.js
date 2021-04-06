@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import "./LandingPage.css";
+import "./DisplayAllShows.css";
 import { allShows } from "./Shows";
 import SearchBar from "./SearchBar";
 import SelectInput from "./SelectInput";
@@ -18,7 +18,9 @@ export default function DisplayAllShows() {
   };
   let filterShows = allShows.filter((item) =>
     selectValue === "Select all shows" || searchInput.length > 0
-      ? item.name.toLowerCase().indexOf(searchInput) !== -1
+      ? item.name.toLowerCase().indexOf(searchInput) !== -1 ||
+        item.summary.toLowerCase().includes(searchInput) ||
+        item.genres.toLowerCase().includes(searchInput)
       : item.name === selectValue
   );
   const handleSelect = (e) => {
@@ -31,47 +33,56 @@ export default function DisplayAllShows() {
 
   return (
     <>
-      <SearchBar
-        searchValue={searchValue}
-        filterEpisode={filterShows}
-        allEpisodes={allShows}
-      />
-      <SelectInput episodes={allShows} handleSelect={handleSelect} />
+      <div className="card-navbar">
+        <SearchBar
+          searchValue={searchValue}
+          filterEpisode={filterShows}
+          allEpisodes={allShows}
+        />
+        <SelectInput episodes={allShows} handleSelect={handleSelect} />
+      </div>
 
-      <div className="episodes-container">
+      <div className="shows-container">
         {allShows &&
           filterShows.map((show, index, e) => {
             console.log();
 
             return (
-              <div className="card" style={{ width: "18rem" }} key={index}>
-                <h5 className="card-title">{show.name}</h5>
+              <div className="show-card">
+                <h5 className="show-card-title">{show.name}</h5>
+                <div className="show-details">
+                  <img
+                    src={
+                      show.image !== null
+                        ? show.image.original
+                        : "https://media.sproutsocial.com/uploads/2017/02/10x-featured-social-media-image-size.png"
+                    }
+                    className="show-card-img-top"
+                    alt=""
+                    onClick={() => handleClick(show.id)}
+                  />
 
-                <img
-                  src={
-                    show.image !== null
-                      ? show.image.original
-                      : "https://media.sproutsocial.com/uploads/2017/02/10x-featured-social-media-image-size.png"
-                  }
-                  className="card-img-top"
-                  alt=""
-                />
-
-                <div className="card-body">
-                  <ShowMoreText
-                    /* Default options */
-                    lines={5}
-                    more="Show more"
-                    less="Show less"
-                    className="content-css"
-                    anchorClass="my-anchor-css-class"
-                    onClick={(e) => e.executeOnClick}
-                    expanded={false}
-                  >
-                    {replaceTags(show.summary)}
-                  </ShowMoreText>
+                  <div className="show-card-body">
+                    <ShowMoreText
+                      /* Default options */
+                      lines={10}
+                      more="Show more"
+                      less="Show less"
+                      className="content-css"
+                      anchorClass="my-anchor-css-class"
+                      onClick={(e) => e.executeOnClick}
+                      expanded={false}
+                    >
+                      {replaceTags(show.summary)}
+                    </ShowMoreText>
+                  </div>
+                  <div className="show-info">
+                    <p>Genres : {show.genres.map((g) => g + ", ")}</p>
+                    <p> Status : {show.status}</p>
+                    <p>Rating : {show.rating.average}</p>
+                    <p>Runtime : {show.runtime}</p>
+                  </div>
                 </div>
-                <button onClick={() => handleClick(show.id)}>Episodes</button>
               </div>
             );
           })}

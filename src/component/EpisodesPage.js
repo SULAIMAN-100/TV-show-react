@@ -2,22 +2,22 @@ import React, { useState, useEffect } from "react";
 import "./LandingPage.css";
 import SearchBar from "./SearchBar";
 import SelectInput from "./SelectInput";
-import {useParams} from "react-router-dom"
+import { useParams } from "react-router-dom";
 
 import ShowMoreText from "react-show-more-text";
 export default function EpisodesPage() {
-const {id} = useParams();
-console.log(id);
+  const { id } = useParams();
+  console.log(id);
 
   const [searchInput, setSearchInput] = useState([]);
   const [selectValue, setSelectValue] = useState("Select all episodes");
 
-    const [allEpisodesApi, setAllEpisodesApi] = useState([]);
-    useEffect(() => {
-      fetch(`https://api.tvmaze.com/shows/${id}/episodes`)
-        .then((data) => data.json())
-        .then((data) => setAllEpisodesApi(data));
-    }, [id]);
+  const [allEpisodesApi, setAllEpisodesApi] = useState([]);
+  useEffect(() => {
+    fetch(`https://api.tvmaze.com/shows/${id}/episodes`)
+      .then((data) => data.json())
+      .then((data) => setAllEpisodesApi(data));
+  }, [id]);
 
   const searchValue = (e) => {
     setSearchInput(e.target.value.toLowerCase());
@@ -49,12 +49,19 @@ console.log(id);
   };
   return (
     <>
-      <SearchBar
-        searchValue={searchValue}
-        filterEpisode={filterEpisode}
-        allEpisodes={allEpisodesApi}
-      />
-      <SelectInput episodes={allEpisodesApi} handleSelect={handleSelect} />
+      <div className="card-navbar">
+        <a href="/">
+          <button>BACK TO SHOWS</button>
+        </a>
+
+        <SearchBar
+          searchValue={searchValue}
+          filterEpisode={filterEpisode}
+          allEpisodes={allEpisodesApi}
+        />
+        <SelectInput episodes={allEpisodesApi} handleSelect={handleSelect} />
+      </div>
+
       <div className="episodes-container">
         {allEpisodesApi &&
           filterEpisode.map((episode, index, e) => {
