@@ -13,6 +13,9 @@ export default function DisplayAllShows() {
     history.push(`/episodes/${id}`);
     console.log(id);
   };
+  const handleCast = (id) => {
+    history.push(`/show-cast/${id}`);
+  };
   const searchValue = (e) => {
     setSearchInput(e.target.value.toLowerCase());
   };
@@ -81,6 +84,7 @@ export default function DisplayAllShows() {
                     <p> Status : {show.status}</p>
                     <p>Rating : {show.rating.average}</p>
                     <p>Runtime : {show.runtime}</p>
+                    <a onClick={() => handleCast(show.id)}>CAST</a>
                   </div>
                 </div>
               </div>
