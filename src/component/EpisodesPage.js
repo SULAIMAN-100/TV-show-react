@@ -2,12 +2,15 @@ import React, { useState, useEffect } from "react";
 import "./LandingPage.css";
 import SearchBar from "./SearchBar";
 import SelectInput from "./SelectInput";
-import { useParams } from "react-router-dom";
+import { useParams, useHistory } from "react-router-dom";
 
 import ShowMoreText from "react-show-more-text";
 export default function EpisodesPage() {
+  const history = useHistory();
   const { id } = useParams();
-  console.log(id);
+  const handleCast = (id) => {
+    history.push(`/episode-cast/${id}`);
+  };
 
   const [searchInput, setSearchInput] = useState([]);
   const [selectValue, setSelectValue] = useState("Select all episodes");
@@ -91,6 +94,7 @@ export default function EpisodesPage() {
                   >
                     {replaceTags(episode.summary)}
                   </ShowMoreText>
+                  <a onClick={() => handleCast(episode.id)}>CAST</a>
                 </div>
               </div>
             );

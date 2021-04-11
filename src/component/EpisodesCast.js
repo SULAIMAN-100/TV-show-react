@@ -3,11 +3,10 @@ import { useParams } from "react-router";
 import GetCast from "./GetCast";
 import "./ShowCasting.css";
 
-export default function ShowCasting() {
+export default function EpisodesCast() {
   let { id } = useParams();
-
   return (
-    <div className="cast-container">
+    <div>
       <GetCast id={id} />
     </div>
   );
