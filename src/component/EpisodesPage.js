@@ -3,8 +3,8 @@ import "./LandingPage.css";
 import SearchBar from "./SearchBar";
 import SelectInput from "./SelectInput";
 import { useParams, useHistory } from "react-router-dom";
-
 import ShowMoreText from "react-show-more-text";
+
 export default function EpisodesPage() {
   const history = useHistory();
   const { id } = useParams();
@@ -13,7 +13,7 @@ export default function EpisodesPage() {
   };
 
   const [searchInput, setSearchInput] = useState([]);
-  const [selectValue, setSelectValue] = useState("Select all episodes");
+  const [selectValue, setSelectValue] = useState("Select All Episodes");
 
   const [allEpisodesApi, setAllEpisodesApi] = useState([]);
   useEffect(() => {
@@ -26,7 +26,7 @@ export default function EpisodesPage() {
     setSearchInput(e.target.value.toLowerCase());
   };
   let filterEpisode = allEpisodesApi.filter((item) =>
-    selectValue === "Select all episodes" || searchInput.length > 0
+    selectValue === "Select All Episodes" || searchInput.length > 0
       ? item.name.toLowerCase().indexOf(searchInput) !== -1 ||
         item.summary.toLowerCase().includes(searchInput)
       : item.name === selectValue
@@ -61,8 +61,13 @@ export default function EpisodesPage() {
           searchValue={searchValue}
           filterEpisode={filterEpisode}
           allEpisodes={allEpisodesApi}
+          placeholder="search for an episode"
         />
-        <SelectInput episodes={allEpisodesApi} handleSelect={handleSelect} />
+        <SelectInput
+          episodes={allEpisodesApi}
+          handleSelect={handleSelect}
+          select="Select All Episodes"
+        />
       </div>
 
       <div className="episodes-container">
@@ -77,7 +82,11 @@ export default function EpisodesPage() {
                 </h5>
 
                 <img
-                  src={episode.image.original}
+                  src={
+                    episode.image
+                      ? episode.image.original
+                      : "https://upload.wikimedia.org/wikipedia/commons/1/14/No_Image_Available.jpg"
+                  }
                   className="card-img-top"
                   alt=""
                 />
@@ -94,7 +103,6 @@ export default function EpisodesPage() {
                   >
                     {replaceTags(episode.summary)}
                   </ShowMoreText>
-                  <a onClick={() => handleCast(episode.id)}>CAST</a>
                 </div>
               </div>
             );

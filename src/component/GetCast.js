@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-
 import "./ShowCasting.css";
 
 export default function GetCast({ id }) {
@@ -7,20 +6,10 @@ export default function GetCast({ id }) {
 
   console.log(cast);
 
-  const getCastInfo = () => {
+  useEffect(() => {
     fetch(`http://api.tvmaze.com/shows/${id}?embed=cast`)
       .then((res) => res.json())
-      .then((data) => {
-        return setCast(data);
-        // if (data.name === "Not Found") {
-        //   setCast("No Cast Available");
-        // } else {
-        //   setCast(data);
-        // }
-      });
-  };
-  useEffect(() => {
-    getCastInfo();
+      .then((data) => setCast(data));
   }, [id]);
 
   const calculateAge = (birthDate, deathDate) => {
@@ -38,12 +27,19 @@ export default function GetCast({ id }) {
 
   return (
     <div className="cast-container">
-      {cast !== "No Cast Available"
+      {cast
         ? cast._embedded.cast.map(({ person }) => {
             return (
               <div key={person.id} className="cast-card">
                 <div>
-                  <img src={person.image.medium} alt="" />
+                  <img
+                    src={
+                      person.image
+                        ? person.image.medium
+                        : "https://upload.wikimedia.org/wikipedia/commons/1/14/No_Image_Available.jpg"
+                    }
+                    alt=""
+                  />
                   <h2>{person.name !== null ? person.name : "No Name"}</h2>
                   <div className="cast-info">
                     <p>
