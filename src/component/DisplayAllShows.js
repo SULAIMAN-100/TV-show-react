@@ -1,26 +1,29 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./DisplayAllShows.css";
-import { allShows } from "./Shows";
+// import { allShows } from "./Shows";
 import SearchBar from "./SearchBar";
 import SelectInput from "./SelectInput";
 import ShowMoreText from "react-show-more-text";
 import { useHistory } from "react-router-dom";
 export default function DisplayAllShows() {
   const [searchInput, setSearchInput] = useState([]);
-  const [selectValue, setSelectValue] = useState("Select all shows");
+  const [selectValue, setSelectValue] = useState("Select All Shows");
+  const [allShows, setAllShows] = useState([]);
+
   const history = useHistory();
   const handleClick = (id) => {
     history.push(`/episodes/${id}`);
-    console.log(id);
+  };
+  const handleCast = (id) => {
+    history.push(`/show-cast/${id}`);
   };
   const searchValue = (e) => {
     setSearchInput(e.target.value.toLowerCase());
   };
   let filterShows = allShows.filter((item) =>
-    selectValue === "Select all shows" || searchInput.length > 0
+    selectValue === "Select All Shows" || searchInput.length > 0
       ? item.name.toLowerCase().indexOf(searchInput) !== -1 ||
-        item.summary.toLowerCase().includes(searchInput) ||
-        item.genres.toLowerCase().includes(searchInput)
+        item.summary.toLowerCase().includes(searchInput)
       : item.name === selectValue
   );
   const handleSelect = (e) => {
@@ -31,38 +34,49 @@ export default function DisplayAllShows() {
     return text.replace(/(<([^>]+)>)/gi, "");
   };
 
+  useEffect(() => {
+    fetch("https://api.tvmaze.com/shows")
+      .then((res) => res.json())
+      .then((data) => setAllShows(data));
+  }, []);
+
   return (
     <>
+      {" "}
       <div className="card-navbar">
+        {" "}
         <SearchBar
           searchValue={searchValue}
           filterEpisode={filterShows}
           allEpisodes={allShows}
-        />
-        <SelectInput episodes={allShows} handleSelect={handleSelect} />
+          placeholder="search for a show"
+        />{" "}
+        <SelectInput
+          episodes={allShows}
+          handleSelect={handleSelect}
+          select="Select All Shows"
+        />{" "}
       </div>
-
       <div className="shows-container">
         {allShows &&
           filterShows.map((show, index, e) => {
-            console.log();
-
             return (
-              <div className="show-card">
-                <h5 className="show-card-title">{show.name}</h5>
+              <div key={index} className="show-card">
+                <h5 className="show-card-title">{show.name}</h5>{" "}
                 <div className="show-details">
+                  {" "}
                   <img
                     src={
                       show.image !== null
-                        ? show.image.original
+                        ? show.image.medium
                         : "https://media.sproutsocial.com/uploads/2017/02/10x-featured-social-media-image-size.png"
                     }
                     className="show-card-img-top"
                     alt=""
                     onClick={() => handleClick(show.id)}
-                  />
-
+                  />{" "}
                   <div className="show-card-body">
+                    {" "}
                     <ShowMoreText
                       /* Default options */
                       lines={10}
@@ -73,20 +87,23 @@ export default function DisplayAllShows() {
                       onClick={(e) => e.executeOnClick}
                       expanded={false}
                     >
-                      {replaceTags(show.summary)}
+                      {" "}
+                      {replaceTags(show.summary)}{" "}
                     </ShowMoreText>
-                  </div>
+                  </div>{" "}
                   <div className="show-info">
-                    <p>Genres : {show.genres.map((g) => g + ", ")}</p>
-                    <p> Status : {show.status}</p>
-                    <p>Rating : {show.rating.average}</p>
-                    <p>Runtime : {show.runtime}</p>
-                  </div>
-                </div>
+                    {" "}
+                    <p> Genres : {show.genres.map((g) => g + ", ")} </p>
+                    <p> Status : {show.status}</p>{" "}
+                    <p> Rating : {show.rating.average} </p>
+                    <p>Runtime : {show.runtime}</p>{" "}
+                    <button onClick={() => handleCast(show.id)}> CAST </button>
+                  </div>{" "}
+                </div>{" "}
               </div>
             );
-          })}
-      </div>
+          })}{" "}
+      </div>{" "}
     </>
   );
 }

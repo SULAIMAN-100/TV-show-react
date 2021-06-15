@@ -1,0 +1,7 @@
+.cast-container {
+  display: flex;
+  flex-wrap: wrap;
+}
+.cast-card {
+  margin: 10px;
+}

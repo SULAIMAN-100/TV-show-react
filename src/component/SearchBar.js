@@ -1,15 +1,17 @@
-import React from 'react'
+import React from "react";
 
-
-export default function SearrchBar({ searchValue, allEpisodes, filterEpisode }) {
+export default function SearrchBar({
+  searchValue,
+  allEpisodes,
+  filterEpisode,
+  placeholder,
+}) {
   return (
     <div>
-      <input
-        type="text"
-        placeholder="search for episode"
-        onChange={searchValue}
-      /> 
-      <p>Display:{filterEpisode.length} / {allEpisodes.length}   episodes</p>
+      <input type="text" placeholder={placeholder} onChange={searchValue} />
+      <p>
+        Display:{filterEpisode.length} / {allEpisodes.length} episodes
+      </p>
     </div>
   );
 }
