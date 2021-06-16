@@ -7,7 +7,7 @@ export default function GetCast({ id }) {
   console.log(cast);
 
   useEffect(() => {
-    fetch(`http://api.tvmaze.com/shows/${id}?embed=cast`)
+    fetch(`https://api.tvmaze.com/shows/${id}?embed=cast`)
       .then((res) => res.json())
       .then((data) => setCast(data));
   }, [id]);
