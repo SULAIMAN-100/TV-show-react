@@ -1,4 +1,4 @@
 {
-    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "editor.defaultFormatter": "mblode.pretty-formatter",
     "editor.formatOnSave": true
 }
