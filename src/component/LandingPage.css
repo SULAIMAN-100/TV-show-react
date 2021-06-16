@@ -25,6 +25,9 @@
   color: white;
   padding: 5px;
 }
+.content-css br {
+  display: none;
+}
 
 .my-anchor-css-class {
   text-decoration: none;

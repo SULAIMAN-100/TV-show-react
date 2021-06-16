@@ -80,7 +80,7 @@ export default function DisplayAllShows() {
                     {" "}
                     <ShowMoreText
                       /* Default options */
-                      lines={10}
+                      lines={16}
                       more="Show more"
                       less="Show less"
                       className="content-css"
