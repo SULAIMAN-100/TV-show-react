@@ -54,7 +54,7 @@ export default function EpisodesPage() {
     <>
       <div className="card-navbar">
         <a href="/">
-          <button>BACK TO SHOWS</button>
+          <button className="back-btn">BACK TO SHOWS</button>
         </a>
 
         <SearchBar

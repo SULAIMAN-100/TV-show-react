@@ -1,7 +1,32 @@
 .cast-container {
   display: flex;
+  justify-content: center;
+  align-items: center;
   flex-wrap: wrap;
 }
 .cast-card {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
   margin: 10px;
+  padding: 10px;
+  background-color: rgb(216, 216, 216);
+  border-radius: 10px;
+}
+.cast-card img {
+  align-self: center;
+  border-radius: 10px;
+  border: 2px solid white;
+}
+
+.cast-card h2 {
+  color: white;
+  padding: 5px;
+  background-color: rgb(196, 0, 0);
+}
+.cast-info {
+  background-color: rgb(71, 71, 71);
+  color: white;
+  padding: 5px;
 }

@@ -10,6 +10,8 @@
 .show-card {
   width: 45%;
   margin: 20px;
+  background-color: rgba(189, 189, 189, 0.74);
+  padding: 10px;
 }
 
 .show-card-img-top {
@@ -20,12 +22,12 @@
 
 .show-card-img-top:hover {
   cursor: pointer;
-  border: 5px solid orange;
+  border: 5px solid rgb(255, 123, 0);
 }
 
 .show-card-title {
   text-align: center;
-  background-color: rgb(80, 80, 80);
+  background-color: rgb(187, 7, 7);
   color: rgb(255, 255, 255);
   padding: 7px;
   font-weight: 600;
@@ -42,13 +44,15 @@
   background-color: rgb(240, 240, 240);
   font-size: 13px;
   padding: 5px;
-  font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
+  font-family: serif;
+  text-align: left;
 }
 
 .card-navbar {
   display: flex;
   justify-content: space-between;
-  background-color: darkgrey;
+  background-color: rgb(58, 58, 58);
+  padding: 20px;
 }
 .show-info {
   background-color: rgb(59, 59, 59);

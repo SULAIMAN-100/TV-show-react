@@ -4,16 +4,29 @@
   align-items: center;
   justify-content: center;
 }
+.back-btn {
+  border-radius: 10px;
+  border: none;
+  padding: 10px;
+  background-color: rgb(202, 0, 0);
+  color: white;
+}
+.back-btn:hover {
+  background-color: rgb(230, 36, 36);
+}
 .card {
   margin: 20px;
   height: auto;
-
+  background-color: rgb(226, 226, 226);
 }
-.card-title{
+.card-title {
   text-align: center;
+  background-color: rgb(187, 7, 7);
+  color: white;
+  padding: 5px;
 }
 .content-css {
-  text-align: center;
+  text-align: left;
   line-height: 1.5;
   transition: 0.3s;
 }
@@ -26,4 +39,25 @@
   color: rgb(212, 44, 44);
   padding: 3px;
   border-radius: 3px;
+}
+.select-input {
+  height: 50%;
+  width: 20rem;
+  padding: 5px;
+  border-radius: 10px;
+}
+.search-input {
+  height: 50%;
+  width: 20rem;
+  padding: 5px;
+  border-radius: 10px;
+}
+.search-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.search-container p {
+  color: white;
 }

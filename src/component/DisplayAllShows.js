@@ -5,6 +5,7 @@ import SearchBar from "./SearchBar";
 import SelectInput from "./SelectInput";
 import ShowMoreText from "react-show-more-text";
 import { useHistory } from "react-router-dom";
+import tvmaze from "../tvmaze.png";
 export default function DisplayAllShows() {
   const [searchInput, setSearchInput] = useState([]);
   const [selectValue, setSelectValue] = useState("Select All Shows");
@@ -44,7 +45,7 @@ export default function DisplayAllShows() {
     <>
       {" "}
       <div className="card-navbar">
-        {" "}
+        <img src={tvmaze} />{" "}
         <SearchBar
           searchValue={searchValue}
           filterEpisode={filterShows}
@@ -97,7 +98,10 @@ export default function DisplayAllShows() {
                     <p> Status : {show.status}</p>{" "}
                     <p> Rating : {show.rating.average} </p>
                     <p>Runtime : {show.runtime}</p>{" "}
-                    <button onClick={() => handleCast(show.id)}> CAST </button>
+                    <button onClick={() => handleCast(show.id)}>
+                      {" "}
+                      SHOW CAST{" "}
+                    </button>
                   </div>{" "}
                 </div>{" "}
               </div>
