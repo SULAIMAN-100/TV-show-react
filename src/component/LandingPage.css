@@ -25,11 +25,7 @@
   color: white;
   padding: 5px;
 }
-.content-css {
-  text-align: left;
-  line-height: 1.5;
-  transition: 0.3s;
-}
+
 .my-anchor-css-class {
   text-decoration: none;
   margin: 5px;

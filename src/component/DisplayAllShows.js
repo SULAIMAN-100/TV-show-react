@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import "./DisplayAllShows.css";
-// import { allShows } from "./Shows";
+import { allShows } from "./Shows";
 import SearchBar from "./SearchBar";
 import SelectInput from "./SelectInput";
 import ShowMoreText from "react-show-more-text";
@@ -9,7 +9,7 @@ import tvmaze from "../tvmaze.png";
 export default function DisplayAllShows() {
   const [searchInput, setSearchInput] = useState([]);
   const [selectValue, setSelectValue] = useState("Select All Shows");
-  const [allShows, setAllShows] = useState([]);
+  // const [allShows, setAllShows] = useState([]);
 
   const history = useHistory();
   const handleClick = (id) => {
@@ -35,11 +35,11 @@ export default function DisplayAllShows() {
     return text.replace(/(<([^>]+)>)/gi, "");
   };
 
-  useEffect(() => {
-    fetch("https://api.tvmaze.com/shows")
-      .then((res) => res.json())
-      .then((data) => setAllShows(data));
-  }, []);
+  // useEffect(() => {
+  //   fetch("https://api.tvmaze.com/shows")
+  //     .then((res) => res.json())
+  //     .then((data) => setAllShows(data));
+  // }, []);
 
   return (
     <>
@@ -89,7 +89,7 @@ export default function DisplayAllShows() {
                       expanded={false}
                     >
                       {" "}
-                      {replaceTags(show.summary)}{" "}
+                      <p> {replaceTags(show.summary)} </p>
                     </ShowMoreText>
                   </div>{" "}
                   <div className="show-info">
