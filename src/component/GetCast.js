@@ -4,8 +4,6 @@ import "./ShowCasting.css";
 export default function GetCast({ id }) {
   const [cast, setCast] = useState(null);
 
-  console.log(cast);
-
   useEffect(() => {
     fetch(`https://api.tvmaze.com/shows/${id}?embed=cast`)
       .then((res) => res.json())

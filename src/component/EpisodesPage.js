@@ -73,8 +73,6 @@ export default function EpisodesPage() {
       <div className="episodes-container">
         {allEpisodesApi &&
           filterEpisode.map((episode, index, e) => {
-            console.log();
-
             return (
               <div className="card" style={{ width: "18rem" }} key={index}>
                 <h5 className="card-title">
