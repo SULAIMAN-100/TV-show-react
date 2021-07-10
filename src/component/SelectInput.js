@@ -2,6 +2,7 @@ import React from "react";
 import "./LandingPage.css";
 
 function SelectInput({ episodes, handleSelect, select }) {
+  //This is the elect input displays the list of the episodes and select one episode on change using {handleSelect} function.
   return (
     <div>
       <select className="select-input" onChange={handleSelect}>

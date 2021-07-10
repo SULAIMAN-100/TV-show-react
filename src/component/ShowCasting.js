@@ -6,7 +6,7 @@ import tvmaze from "../tvmaze.png";
 
 export default function ShowCasting() {
   let { id } = useParams();
-
+  // casting component;
   return (
     <div>
       <div className="card-navbar">

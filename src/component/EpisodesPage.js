@@ -6,31 +6,30 @@ import { useParams, useHistory } from "react-router-dom";
 import ShowMoreText from "react-show-more-text";
 
 export default function EpisodesPage() {
-  const history = useHistory();
   const { id } = useParams();
-  const handleCast = (id) => {
-    history.push(`/episode-cast/${id}`);
-  };
-
   const [searchInput, setSearchInput] = useState([]);
   const [selectValue, setSelectValue] = useState("Select All Episodes");
 
   const [allEpisodesApi, setAllEpisodesApi] = useState([]);
+  // Fetching episodes from tv maze api based on the shoe id.
   useEffect(() => {
     fetch(`https://api.tvmaze.com/shows/${id}/episodes`)
       .then((data) => data.json())
       .then((data) => setAllEpisodesApi(data));
   }, [id]);
-
+  // to get the search value of an episode.
   const searchValue = (e) => {
     setSearchInput(e.target.value.toLowerCase());
   };
+
   let filterEpisode = allEpisodesApi.filter((item) =>
     selectValue === "Select All Episodes" || searchInput.length > 0
       ? item.name.toLowerCase().indexOf(searchInput) !== -1 ||
         item.summary.toLowerCase().includes(searchInput)
       : item.name === selectValue
   );
+
+  // to handle season number in the episode title by removing 0 in the number > 10.
   const seasonNumbers = (episode) => {
     if (episode.season < 10 && episode.number < 10) {
       return ` - S0${episode.season}E0${episode.number}`;
@@ -46,7 +45,6 @@ export default function EpisodesPage() {
   };
 
   //// Show less and more text
-
   const replaceTags = (text) => {
     return text.replace(/(<([^>]+)>)/gi, "");
   };

@@ -7,6 +7,8 @@ export default function SearrchBar({
   placeholder,
 }) {
   return (
+    //get the value and search on change using {searchValue} function,
+    // then display the number of epidoes on the search out of the totals number.
     <div className="search-container">
       <input
         className="search-input"
@@ -14,6 +16,7 @@ export default function SearrchBar({
         placeholder={placeholder}
         onChange={searchValue}
       />
+
       <p>
         Display:{filterEpisode.length} / {allEpisodes.length} episode(s)
       </p>

@@ -9,7 +9,6 @@ import tvmaze from "../tvmaze.png";
 export default function DisplayAllShows() {
   const [searchInput, setSearchInput] = useState([]);
   const [selectValue, setSelectValue] = useState("Select All Shows");
-  // const [allShows, setAllShows] = useState([]);
 
   const history = useHistory();
   const handleClick = (id) => {
@@ -34,13 +33,8 @@ export default function DisplayAllShows() {
   const replaceTags = (text) => {
     return text.replace(/(<([^>]+)>)/gi, "");
   };
-
-  // useEffect(() => {
-  //   fetch("https://api.tvmaze.com/shows")
-  //     .then((res) => res.json())
-  //     .then((data) => setAllShows(data));
-  // }, []);
-
+  // rendering the earch bar and the select input in the navbar of the landing page and the body (All shows).
+  // Here displaying all shows each show in div block with the title, image, summary, genre, rating, run time, status and a button to display cast.
   return (
     <>
       {" "}
